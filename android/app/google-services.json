@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "95524298113",
+    "project_id": "fala-pommer",
+    "storage_bucket": "fala-pommer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95524298113:android:995914bf145010da6c9c80",
+        "android_client_info": {
+          "package_name": "com.gertin.falapommer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF3McUJARjqICV9H-N_7xy0BpbsY75J6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

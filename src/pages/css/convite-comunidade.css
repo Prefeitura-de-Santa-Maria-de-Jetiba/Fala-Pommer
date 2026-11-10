@@ -1,0 +1,106 @@
+.convite-comunidade {
+    min-height: 100dvh;
+    padding: 24px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, #edf4ff, #f8fafc);
+}
+
+.convite-comunidade__cartao {
+    width: min(100%, 440px);
+    padding: 36px;
+    display: grid;
+    justify-items: center;
+    gap: 16px;
+    border: 1px solid #dce7f7;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 20px 50px rgba(15, 38, 73, 0.15);
+    text-align: center;
+}
+
+.convite-comunidade__icone {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #1351b4;
+    background: #dcecff;
+}
+
+.convite-comunidade__icone svg {
+    width: 30px;
+    height: 30px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.convite-comunidade__cartao h1 {
+    margin: 0;
+    color: #172033;
+    font-family: var(--fonte-poppins, sans-serif);
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
+
+.convite-comunidade__cartao p {
+    margin: 0;
+    color: #667085;
+    font-family: var(--fonte-dm-sans, sans-serif);
+    line-height: 1.55;
+}
+
+.convite-comunidade__cartao button {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 8px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    background: #1351b4;
+    cursor: pointer;
+    font-family: var(--fonte-dm-sans, sans-serif);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.convite-comunidade__cartao button:hover:not(:disabled) {
+    background: #0b326b;
+}
+
+.convite-comunidade__cartao button:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.convite-comunidade__cartao button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.convite-comunidade__erro {
+    color: #b42318 !important;
+    font-size: 0.875rem;
+}
+
+html.tema-escuro:not(.alto-contraste) .convite-comunidade {
+    background: #101b2d;
+}
+
+html.tema-escuro:not(.alto-contraste) .convite-comunidade__cartao {
+    border-color: var(--tema-borda);
+    background: var(--tema-superficie-elevada);
+}
+
+html.tema-escuro:not(.alto-contraste) .convite-comunidade__cartao h1 {
+    color: var(--tema-texto);
+}
+
+html.tema-escuro:not(.alto-contraste) .convite-comunidade__cartao p {
+    color: var(--tema-texto-secundario);
+}

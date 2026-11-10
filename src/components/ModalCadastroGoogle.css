@@ -1,0 +1,403 @@
+.modal-cadastro-google-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 3vw, 32px);
+  background:
+    radial-gradient(circle at 50% 15%, rgb(49 128 255 / 20%), transparent 34%),
+    rgb(5 13 28 / 72%);
+  backdrop-filter: blur(7px);
+  animation: modal-cadastro-google-fundo-entrar 180ms ease-out both;
+}
+
+.modal-cadastro-google {
+  display: grid;
+  grid-template-rows: auto minmax(180px, 1fr) auto;
+  width: min(620px, 100%);
+  max-height: min(720px, 100%);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow:
+    0 30px 90px rgb(4 12 28 / 42%),
+    0 2px 10px rgb(4 12 28 / 12%);
+  animation: modal-cadastro-google-janela-entrar 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.modal-cadastro-google__cabecalho {
+  position: relative;
+  display: flex;
+  min-height: 132px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 24px 22px;
+  overflow: hidden;
+  border-bottom: 0;
+  background:
+    radial-gradient(circle at 90% -20%, rgb(255 255 255 / 22%), transparent 42%),
+    linear-gradient(135deg, #0b326b 0%, #1351b4 58%, #2878df 100%);
+}
+
+.modal-cadastro-google__cabecalho::after {
+  position: absolute;
+  right: 76px;
+  bottom: -54px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgb(255 255 255 / 11%);
+  border-radius: 50%;
+  content: "";
+}
+
+.modal-cadastro-google__titulo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 16px;
+}
+
+.modal-cadastro-google__icone {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: 16px;
+  background: rgb(255 255 255 / 14%);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 15%);
+}
+
+.modal-cadastro-google__icone svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.modal-cadastro-google__icone svg.bi {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.modal-cadastro-google__etapa {
+  display: block;
+  margin-bottom: 3px;
+  color: #bcd7ff;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.modal-cadastro-google__cabecalho h2 {
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--fonte-poppins);
+  font-size: 1.375rem;
+  font-weight: 600;
+}
+
+.modal-cadastro-google__cabecalho p {
+  margin: 4px 0 0;
+  color: #d9e8ff;
+  font-size: 0.8125rem;
+}
+
+.modal-cadastro-google__formulario {
+  display: contents;
+}
+
+.modal-cadastro-google__conteudo {
+  min-height: 180px;
+  padding: 24px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.modal-cadastro-google__conteudo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-cadastro-google__conteudo > div:first-child {
+  grid-column: 1 / -1;
+}
+
+.modal-cadastro-google__conteudo .modal-cadastro-google__forca-senha {
+  grid-column: 1 / -1;
+  gap: 6px;
+}
+
+.modal-cadastro-google__forca-senha p {
+  margin: 0;
+}
+
+.modal-cadastro-google__conteudo input[readonly] {
+  background: #f3f6fa;
+  color: #475467;
+  cursor: not-allowed;
+}
+
+.modal-cadastro-google__conteudo label {
+  color: #222222;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.modal-cadastro-google__conteudo input {
+  width: 100%;
+  height: 50px;
+  padding: 0 14px;
+  border: 1px solid #c9c9c9;
+  border-radius: 6px;
+  outline: none;
+  background-color: #ffffff;
+  color: #222222;
+  font-family: inherit;
+  font-size: 1rem;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.modal-cadastro-google__conteudo input::placeholder {
+  color: #929292;
+}
+
+.modal-cadastro-google__conteudo input:hover {
+  border-color: #8b8b8b;
+}
+
+.modal-cadastro-google__conteudo input:focus {
+  border-color: #1351b4;
+  box-shadow: 0 0 0 4px rgb(19 81 180 / 15%);
+}
+
+.modal-cadastro-google__conteudo input[type="date"] {
+  color: #555555;
+}
+
+.modal-cadastro-google__conteudo input[type="date"]:valid {
+  color: #222222;
+}
+
+.modal-cadastro-google__rodape {
+  display: flex;
+  min-height: 66px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  border-top: 1px solid #e5eaf0;
+  background: linear-gradient(180deg, #fbfcfe, #f5f8fc);
+}
+
+.modal-cadastro-google__resumo {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.modal-cadastro-google__icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #667085;
+  font-size: 0.8125rem;
+}
+
+.modal-cadastro-google__icon svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.modal-cadastro-google__icon svg.bi {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.modal-cadastro-google__rodape button {
+  min-height: 40px;
+  padding: 8px 17px;
+  border: 0;
+  border-radius: 9px;
+  background: #1351b4;
+  color: #ffffff;
+  font-family: var(--fonte-dm-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgb(19 81 180 / 20%);
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.modal-cadastro-google__rodape button:hover {
+  background: #0d397d;
+  transform: translateY(-1px);
+}
+
+.modal-cadastro-google__rodape button:focus-visible {
+  outline: 3px solid rgb(19 81 180 / 30%);
+  outline-offset: 2px;
+}
+
+.modal-cadastro-google__rodape button:disabled {
+  background: #c9d3e1;
+  color: #667085;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@keyframes modal-cadastro-google-fundo-entrar {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-cadastro-google-janela-entrar {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.975);
+  }
+}
+
+@media (max-width: 700px) {
+  .modal-cadastro-google-fundo {
+    padding: 0;
+  }
+
+  .modal-cadastro-google {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 0;
+    border-radius: 0;
+    overscroll-behavior: contain;
+  }
+
+  .modal-cadastro-google__cabecalho {
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    min-height: 116px;
+    flex: 0 0 auto;
+    padding: 18px 16px;
+  }
+
+  .modal-cadastro-google__icone {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+    border-radius: 14px;
+  }
+
+  .modal-cadastro-google__icone svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .modal-cadastro-google__cabecalho h2 {
+    font-size: 1.25rem;
+  }
+
+  .modal-cadastro-google__cabecalho p {
+    max-width: 240px;
+    font-size: 0.75rem;
+  }
+
+  .modal-cadastro-google__conteudo {
+    flex: 1 0 180px;
+    padding: 20px 16px;
+  }
+
+  .modal-cadastro-google__conteudo {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-cadastro-google__conteudo > div:first-child {
+    grid-column: auto;
+  }
+
+  .modal-cadastro-google__rodape {
+    position: sticky;
+    z-index: 2;
+    bottom: 0;
+    flex: 0 0 auto;
+    margin-top: auto;
+    padding-inline: 16px;
+  }
+
+  .modal-cadastro-google__rodape button {
+    padding-inline: 14px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .modal-cadastro-google__cabecalho {
+    gap: 10px;
+  }
+
+  .modal-cadastro-google__titulo {
+    gap: 11px;
+  }
+
+  .modal-cadastro-google__icone {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .modal-cadastro-google__cabecalho p {
+    max-width: 190px;
+  }
+
+  .modal-cadastro-google__rodape {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .modal-cadastro-google__icon {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-cadastro-google-fundo,
+  .modal-cadastro-google {
+    animation: none;
+  }
+
+  .modal-cadastro-google__rodape button {
+    transition: none;
+  }
+}

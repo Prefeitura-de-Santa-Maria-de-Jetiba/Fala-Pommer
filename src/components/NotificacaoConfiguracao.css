@@ -1,0 +1,233 @@
+.notificacao-configuracao {
+    position: fixed;
+    z-index: 10000;
+    top: 24px;
+    right: 24px;
+    display: grid;
+    width: min(430px, calc(100vw - 48px));
+    min-height: 110px;
+    grid-template-columns: 48px minmax(0, 1fr) 28px;
+    align-items: start;
+    gap: 14px;
+    overflow: hidden;
+    padding: 16px 16px 15px;
+    border: 1px solid #ccd4df;
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.98);
+    color: #111827;
+    box-shadow: 0 16px 44px rgba(15, 38, 73, 0.18);
+    font-family: var(--fonte-dm-sans);
+    animation: notificacaoConfiguracaoEntrada 220ms ease-out;
+}
+
+.notificacao-configuracao__icone {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border-radius: 50%;
+    background: #e7f0ff;
+    color: #1351b4;
+}
+
+.notificacao-configuracao__icone svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.2;
+}
+
+.notificacao-configuracao__conteudo {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 1px;
+}
+
+.notificacao-configuracao__conteudo strong {
+    font-family: var(--fonte-poppins);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+}
+
+.notificacao-configuracao__conteudo p {
+    margin: 0;
+    color: #273142;
+    font-size: 0.875rem;
+    line-height: 1.35;
+}
+
+.notificacao-configuracao__conteudo span {
+    color: #7a8494;
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.notificacao-configuracao__fechar {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    padding: 5px;
+    place-items: center;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #5d6878;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+.notificacao-configuracao__fechar:hover {
+    background: #edf2f7;
+    color: #172033;
+}
+
+.notificacao-configuracao__fechar:focus-visible {
+    outline: 3px solid rgba(19, 81, 180, 0.25);
+    outline-offset: 2px;
+}
+
+.notificacao-configuracao__fechar svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 1.8;
+}
+
+.notificacao-configuracao__progresso {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    transform-origin: left;
+    background: #0b6ee8;
+    animation: notificacaoConfiguracaoProgresso 5s linear forwards;
+}
+
+html.tema-escuro:not(.alto-contraste) .notificacao-configuracao {
+    border-color: #465467;
+    background: rgba(24, 34, 48, 0.98);
+    color: #f8fafc;
+}
+
+html.tema-escuro:not(.alto-contraste) .notificacao-configuracao__conteudo p {
+    color: #e2e8f0;
+}
+
+html.tema-escuro:not(.alto-contraste) .notificacao-configuracao__conteudo span {
+    color: #aeb9c8;
+}
+
+html.tema-escuro:not(.alto-contraste) .notificacao-configuracao__fechar {
+    color: #c5ceda;
+}
+
+html.tema-escuro:not(.alto-contraste) .notificacao-configuracao__fechar:hover {
+    background: #2b394b;
+    color: #ffffff;
+}
+
+html.alto-contraste body .notificacao-configuracao {
+    border: 3px solid #000000 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+html.alto-contraste body .notificacao-configuracao__conteudo :is(strong, p, span) {
+    color: #000000 !important;
+}
+
+html.alto-contraste body .notificacao-configuracao__icone {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+@keyframes notificacaoConfiguracaoEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes notificacaoConfiguracaoProgresso {
+    to {
+        transform: scaleX(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .notificacao-configuracao {
+        top: 10px;
+        right: 10px;
+        width: calc(100vw - 20px);
+        min-height: 96px;
+        grid-template-columns: 42px minmax(0, 1fr) 28px;
+        gap: 10px;
+        padding: 12px 12px 13px;
+        border-radius: 9px;
+    }
+
+    .notificacao-configuracao__icone {
+        width: 42px;
+        height: 42px;
+    }
+
+    .notificacao-configuracao__icone svg {
+        width: 23px;
+        height: 23px;
+    }
+
+    .notificacao-configuracao__conteudo {
+        gap: 3px;
+        padding-top: 0;
+    }
+
+    .notificacao-configuracao__conteudo strong {
+        font-size: 0.9375rem;
+    }
+
+    .notificacao-configuracao__conteudo p {
+        font-size: 0.78125rem;
+        line-height: 1.35;
+    }
+
+    .notificacao-configuracao__conteudo span {
+        font-size: 0.6875rem;
+    }
+
+    .notificacao-configuracao__fechar {
+        width: 28px;
+        height: 28px;
+        padding: 5px;
+    }
+
+    .notificacao-configuracao__fechar svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .notificacao-configuracao__progresso {
+        height: 2px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .notificacao-configuracao,
+    .notificacao-configuracao__progresso {
+        animation: none;
+    }
+}

@@ -1,0 +1,107 @@
+.modal-fundo {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+
+    animation: aparecerFundo 0.3s ease;
+}
+
+.modal-feedback {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px;
+
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+    text-align: center;
+
+    animation: aparecerModal 0.4s ease;
+}
+
+.modal-icone {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    color: #ffffff;
+
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.modal-erro .modal-icone {
+    background: #d93025;
+}
+
+.modal-sucesso .modal-icone {
+    background: #198754;
+}
+
+.modal-feedback h2 {
+    margin-bottom: 12px;
+    color: #252525;
+    font-size: 1.5rem;
+}
+
+.modal-feedback p {
+    margin-bottom: 24px;
+    color: #666666;
+    line-height: 1.5;
+}
+
+.modal-feedback button {
+    width: 100%;
+    padding: 13px 20px;
+
+    border: none;
+    border-radius: 8px;
+    background: #1351b4;
+    color: #ffffff;
+
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.modal-feedback button:hover {
+    background: #0c3d8f;
+}
+
+@keyframes aparecerFundo {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes aparecerModal {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Evita restaurar em outro aparelho um token cifrado por uma chave local. -->
+        <exclude
+            domain="sharedpref"
+            path="WSSecureStorageSharedPreferences.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude
+            domain="sharedpref"
+            path="WSSecureStorageSharedPreferences.xml" />
+    </device-transfer>
+</data-extraction-rules>

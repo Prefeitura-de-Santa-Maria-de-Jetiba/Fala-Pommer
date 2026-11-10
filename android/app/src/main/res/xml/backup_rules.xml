@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- A chave do Keystore pertence ao aparelho; não exporta o token criptografado. -->
+    <exclude
+        domain="sharedpref"
+        path="WSSecureStorageSharedPreferences.xml" />
+</full-backup-content>
