@@ -67,3 +67,5 @@ dist/
 *.js.map
 src/**/*.js
 src/**/*.d.ts
+lib/**/*.js
+lib/**/*.d.ts

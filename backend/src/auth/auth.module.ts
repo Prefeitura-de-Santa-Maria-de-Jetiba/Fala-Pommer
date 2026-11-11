@@ -29,7 +29,9 @@ import { TwoFactorEmailService } from "./two-factor-email.service";
             middleware: {
                 mount: true,
                 setup: (cls, req) => {
-                    cls.set('clienteIp', getClientIp(req));
+                    const ip = (req.ip ?? req.socket.remoteAddress ?? "")
+                        .replace(/^::ffff:/, "");
+                    cls.set("clienteIp", ip);
                 },
             },
         }),

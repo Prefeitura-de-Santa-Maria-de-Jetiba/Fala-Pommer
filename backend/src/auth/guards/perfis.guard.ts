@@ -3,6 +3,7 @@ import {
     CanActivate,
     ExecutionContext,
     ForbiddenException,
+    UnauthorizedException,
     Injectable
 } from "@nestjs/common";
 
@@ -16,11 +17,14 @@ import {
 import type {
     RequisicaoAutenticada
 } from "../auth.guard";
+import { ClsService } from "nestjs-cls";
+import { criarArquivoLogMonitorSeguranca } from "src/security-log/security-log";
 
 @Injectable()
 export class PerfisGuard implements CanActivate {
     constructor(
-        private readonly reflector: Reflector
+        private readonly reflector: Reflector,
+        private readonly cls: ClsService
     ) {}
 
     canActivate(contexto: ExecutionContext): boolean {
@@ -43,10 +47,43 @@ export class PerfisGuard implements CanActivate {
 
         const tipoUsuario = requisicao.usuario?.tipo;
 
-        if (
-            !tipoUsuario ||
-            !perfisPermitidos.includes(tipoUsuario)
-        ) {
+        if (!tipoUsuario) {
+            criarArquivoLogMonitorSeguranca.call(
+                this,
+                "UNAUTHENTICATED_ACCESS",
+                requisicao.originalUrl,
+                401
+            );
+
+            throw new UnauthorizedException(
+                "Autenticação necessária."
+            );
+        }
+
+        if (!perfisPermitidos.includes(tipoUsuario)) {
+            
+            if (
+                perfisPermitidos.includes("admin") ||
+                perfisPermitidos.includes("superAdmin")
+            ) {
+                criarArquivoLogMonitorSeguranca.call(
+                    this,
+                    "TENTATIVA_ESCALONAMENTO_FUNCAO",
+                    requisicao.originalUrl,
+                    403
+                );
+                throw new ForbiddenException(
+                    "Você não possui permissão para acessar esta área."
+                );
+            }
+
+            criarArquivoLogMonitorSeguranca.call(
+                this,
+                "FORBIDDEN_ACCESS",
+                requisicao.originalUrl,
+                403
+            );
+
             throw new ForbiddenException(
                 "Você não possui permissão para acessar esta área."
             );
@@ -54,4 +91,5 @@ export class PerfisGuard implements CanActivate {
 
         return true;
     }
+
 }

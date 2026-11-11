@@ -11,7 +11,7 @@ export async function criarArquivoLogMonitorSeguranca(
         const diretorioLogs =
             process.env.SECURITY_LOGS_DIR ??
             path.join(process.cwd(), "logs");
-        const caminhoArquivo = path.join(diretorioLogs, '../logs/security-logs.jsonl');
+        const caminhoArquivo = path.join(diretorioLogs, "security-logs.jsonl");
         const ip = this.cls.get<string>('clienteIp');
         const conteudo = {
             ip: `${ip}`,
