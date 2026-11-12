@@ -16,6 +16,7 @@ import { TransferirConversaDto } from "./dto/transferir-conversa.dto";
 import { Prisma } from "../generated/prisma/client";
 import { NotificacoesService } from "../notificacoes/notificacoes.service";
 import { MensagensCriptografiaService } from "../criptografia/mensagens-criptografia.service";
+import IdentificadorDeSpanMensagens from "../services/identificadorDeSpanMensagens"
 
 export type ArquivoMensagemUpload = {
     originalname: string;
@@ -1856,6 +1857,8 @@ export class ConversasService {
                 "Esta conversa está disponível somente para visualização."
             );
         }
+
+        await IdentificadorDeSpanMensagens(this.prisma, usuarioLogadoId, conversaId)
 
         if (mensagemRespondidaId !== undefined) {
             const visivelDesdeMensagemId =

@@ -111,7 +111,7 @@ export class AuthGuard implements CanActivate {
             }
 
             if (erro instanceof JsonWebTokenError) {
-                this.registrarLog("INVALID_TOKEN", requisicao)
+                this.registrarLog("TOKEN_INVALIDO", requisicao)
                 throw new UnauthorizedException("Token inválido.");
             }
 

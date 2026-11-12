@@ -76,6 +76,13 @@ export class AuthService {
             
 
         if (!usuario) {
+            criarArquivoLogMonitorSeguranca.call(
+                this,
+                "EMAIL_INCORRETO",
+                "/auth/login",
+                401
+            );
+
             throw new UnauthorizedException(
                 "E-mail inválido."
             );
@@ -94,7 +101,7 @@ export class AuthService {
 
             criarArquivoLogMonitorSeguranca.call(
                 this,
-                "LOGIN_FAILED",
+                "SENHA_INCORRETA",
                 "/auth/login",
                 401
             );
