@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:hostinger": "npm ci --prefix backend && npm run build && mkdir -p backend/public && cp -a dist/. backend/public/ && cd backend && npx prisma generate && npm run build",
     "android": "npm run build && npx cap sync android",
     "apk": "cd android && set \"JAVA_HOME=C:\\Users\\makalister.zager\\.jdks\\jbr-21.0.11\" && gradlew.bat assembleDebug --console=plain",
     "lint": "oxlint",
