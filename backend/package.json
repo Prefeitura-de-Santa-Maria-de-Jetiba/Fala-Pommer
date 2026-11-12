@@ -26,6 +26,7 @@
     "@nestjs/jwt": "^11.0.2",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/platform-socket.io": "^11.2.8",
+    "@nestjs/serve-static": "^5.0.5",
     "@nestjs/websockets": "^11.2.8",
     "@prisma/adapter-mariadb": "^7.10.1",
     "@prisma/client": "^7.9.1",

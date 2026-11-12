@@ -14,9 +14,11 @@ import { SecretariaModule } from './secretaria/secretaria.module';
 import { NotificacoesModule } from './notificacoes/notificacoes.module';
 import { RecaptchaModule } from './recaptcha/recaptcha.module';
 import { ComunidadesModule } from './comunidades/comunidades.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
-  imports: [PrismaModule, UsuariosModule, RecuperacaoSenhaModule, EmailModule, AuthModule, ConfigModule.forRoot({isGlobal: true, envFilePath: ['.env.local', '.env', '../.env']}), RecaptchaModule, NotificacoesModule, ConversasModule, SetoresModule, SecretariaModule, ComunidadesModule],
+  imports: [PrismaModule, UsuariosModule, RecuperacaoSenhaModule, EmailModule, AuthModule, ConfigModule.forRoot({isGlobal: true, envFilePath: ['.env.local', '.env', '../.env']}), ServeStaticModule.forRoot({rootPath: join(__dirname, '..', 'public'), exclude: ['/api{/*path}'],}), RecaptchaModule, NotificacoesModule, ConversasModule, SetoresModule, SecretariaModule, ComunidadesModule],
   controllers: [AppController],
   providers: [AppService],
 })

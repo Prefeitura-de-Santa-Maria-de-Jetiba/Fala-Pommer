@@ -32,6 +32,8 @@ async function bootstrap() {
     }),
   );
 
+  app.setGlobalPrefix('api');
+
   // Aceita conexões de outros dispositivos da rede.
   await app.listen(process.env.PORT ?? 3000, "0.0.0.0");
 }
