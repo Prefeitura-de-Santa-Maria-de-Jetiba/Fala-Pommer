@@ -10,7 +10,6 @@ import { ModalCadastroGoogle } from "../components/ModalCadastroGoogle";
 import { useAutenticacao } from "../components/AutenticacaoContext";
 import { requisicaoPublica } from "../services/api";
 import { useRecaptchaToken } from "../hooks/useRecaptchaToken";
-import RestaurarSessao from "../components/restaurarSessao/RestaurarSessao";
 
 import {
   GoogleLogin,
@@ -110,7 +109,6 @@ function Login() {
   const [etapa, setEtapa] = useState<"credenciais" | "verificacao">(
     "credenciais",
   );
-  const [splash, setSplash] = useState(true);
   const [desafio, setDesafio] = useState<DesafioLogin | null>(null);
   const [codigo, setCodigo] = useState("");
   const [usarRecuperacao, setUsarRecuperacao] = useState(false);
@@ -513,6 +511,20 @@ function Login() {
 
   return (
     <>
+      {carregar && (
+        <p
+          role="status"
+          aria-live="polite"
+          style={{
+            minHeight: "100vh",
+            margin: 0,
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          Restaurando sessão...
+        </p>
+      )}
       {!carregar && <main className="login">
         <section className="login__formulario">
           <header className="login__cabecalho">
@@ -854,13 +866,6 @@ function Login() {
           }}
         />
       </main>}
-
-      {splash && (
-        <RestaurarSessao
-          pronto={!carregar}
-          onConcluir={() => setSplash(false)}
-        />
-      )}
     </>
   );
 }

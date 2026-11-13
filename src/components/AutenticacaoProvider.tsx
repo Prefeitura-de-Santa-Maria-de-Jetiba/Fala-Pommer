@@ -19,6 +19,35 @@ import {
   obterRefreshTokenSeguro,
 } from "../services/armazenamentoSessao";
 
+const TEMPO_LIMITE_RESTAURACAO_MS = 15000;
+const ERRO_TEMPO_ESGOTADO = "tempo_esgotado";
+
+// Evita que a tela fique presa em "Restaurando sessão" se a API não responder.
+function comTempoLimite<T>(promessa: Promise<T>, ms: number): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const id = window.setTimeout(
+      () => reject(new Error(ERRO_TEMPO_ESGOTADO)),
+      ms,
+    );
+
+    promessa.then(
+      (valor) => {
+        window.clearTimeout(id);
+        resolve(valor);
+      },
+      (erro) => {
+        window.clearTimeout(id);
+        reject(erro);
+      },
+    );
+  });
+}
+
+// Limpa a sessão local sem deixar a interface presa se o cofre nativo travar.
+function limparSemTravar() {
+  return comTempoLimite(limparSessaoLocal(), 5000).catch(() => undefined);
+}
+
 interface AutenticacaoProviderProps {
   children: ReactNode;
 }
@@ -61,10 +90,13 @@ export function AutenticacaoProvider({
         }
 
         // Também tenta renovar via cookie web ou cofre nativo quando o JWT sumiu.
-        const resposta = await apiFetch("/auth/perfil");
+        const resposta = await comTempoLimite(
+          apiFetch("/auth/perfil"),
+          TEMPO_LIMITE_RESTAURACAO_MS,
+        );
 
         if (!resposta.ok) {
-          await limparSessaoLocal();
+          await limparSemTravar();
           return;
         }
 
@@ -74,9 +106,19 @@ export function AutenticacaoProvider({
           setUsuario(perfil);
           setBiometriaPendente(false);
         }
-      } catch {
+      } catch (erro) {
+        // Falha de rede (sem resposta ou "Failed to fetch") não é motivo para
+        // apagar a sessão salva: apenas libera a interface para tentar de novo.
+        if (
+          erro instanceof TypeError ||
+          (erro instanceof Error && erro.message === ERRO_TEMPO_ESGOTADO)
+        ) {
+          console.error("Falha de rede ao restaurar a sessão.", erro);
+          return;
+        }
+
         // O cancelamento do prompt é tratado acima e não apaga o refresh token.
-        await limparSessaoLocal();
+        await limparSemTravar();
       } finally {
         if (ativo) {
           setCarregando(false);
