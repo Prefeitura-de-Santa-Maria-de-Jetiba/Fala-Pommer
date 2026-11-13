@@ -13,6 +13,12 @@ async function bootstrap() {
     prefix: '/uploads/',
   });
 
+  // O front monta as URLs com VITE_API_URL (que termina em /api), então os
+  // arquivos também precisam responder em /api/uploads.
+  app.useStaticAssets(join(process.cwd(), 'uploads'), {
+    prefix: '/api/uploads/',
+  });
+
   // Inclui a origem padrão do WebView Android nas chamadas autenticadas.
   app.enableCors({
     origin: [
