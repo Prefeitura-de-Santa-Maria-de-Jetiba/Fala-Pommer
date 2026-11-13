@@ -39,6 +39,10 @@ import { RecaptchaService } from "../recaptcha/recaptcha.service";
 
 const COOKIE_REFRESH_TOKEN = "fala_pommer_refresh_token";
 const DURACAO_COOKIE_REFRESH_MS = 400 * 24 * 60 * 60 * 1000;
+// A API usa setGlobalPrefix("api"), então a rota real é /api/auth/refresh.
+const CAMINHO_COOKIE_REFRESH = "/api/auth";
+// Caminho antigo, que o navegador nunca enviava; só é usado para limpar o cookie velho.
+const CAMINHO_COOKIE_REFRESH_ANTIGO = "/auth";
 const CABECALHO_CLIENTE = "x-fala-pommer-cliente";
 const CLIENTE_CAPACITOR = "capacitor";
 
@@ -393,12 +397,21 @@ export class AuthController {
     }
 
     private definirCookieRefresh(resposta: Response, refreshToken: string) {
+        // Remove o cookie antigo (Path=/auth), que o navegador nunca enviava
+        // para /api/auth/refresh.
+        resposta.clearCookie(COOKIE_REFRESH_TOKEN, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: CAMINHO_COOKIE_REFRESH_ANTIGO
+        });
+
         // A renovação atualiza a validade do cookie persistente e HttpOnly.
         resposta.cookie(COOKIE_REFRESH_TOKEN, refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
-            path: "/auth",
+            path: CAMINHO_COOKIE_REFRESH,
             maxAge: DURACAO_COOKIE_REFRESH_MS
         });
     }
@@ -408,7 +421,15 @@ export class AuthController {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
-            path: "/auth"
+            path: CAMINHO_COOKIE_REFRESH
+        });
+
+        // Limpa também o cookie antigo, se ainda existir no navegador.
+        resposta.clearCookie(COOKIE_REFRESH_TOKEN, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: CAMINHO_COOKIE_REFRESH_ANTIGO
         });
     }
 
