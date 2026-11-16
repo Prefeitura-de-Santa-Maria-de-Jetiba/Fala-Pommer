@@ -328,7 +328,7 @@ function ModalDadosComunidades({
         setAdicionandoPessoasComunidade(false);
 
         try {
-            const resposta = await apiFetch("usuarios/comunidades/contatos");
+            const resposta = await apiFetch("/usuarios/comunidades/contatos");
         
             if (!resposta.ok) {
                 throw new Error("Não foi possível carregar os contatos.");
