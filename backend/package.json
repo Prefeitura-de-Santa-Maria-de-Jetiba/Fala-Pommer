@@ -40,7 +40,7 @@
     "google-auth-library": "^11.1.0",
     "livekit-server-sdk": "^2.19.0",
     "nestjs-cls": "^7.0.2",
-    "nodemailer": "^9.0.3",
+    "nodemailer": "^10.6.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "socket.io": "^4.8.4"
@@ -92,5 +92,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "moduleNameMapper": {
+    "^(\\.{1,2}/.*)\\.js$": "$1",
+    "^src/(.*)$": "<rootDir>/$1"
   }
 }
