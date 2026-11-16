@@ -8,4 +8,4 @@ export const UPLOADS_DIR =
 // Garante que as subpastas existam (a pasta nova começa vazia).
 for (const sub of ['chat', 'comunidades', 'perfis']) {
     mkdirSync(join(UPLOADS_DIR, sub), { recursive: true });
-}
+} 
