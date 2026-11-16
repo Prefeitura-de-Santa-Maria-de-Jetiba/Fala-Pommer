@@ -10,7 +10,6 @@ import { MensagensCriptografiaService } from '../criptografia/mensagens-criptogr
 import { ListarMensagensDto } from '../conversas/dto/listar-mensagens.dto';
 import { randomBytes } from 'node:crypto';
 import { AtualizarDadosComunidade } from './dto/atualizar-dados-comunidade.dto';
-import { UPLOADS_DIR } from 'src/config/uploads';
 
 function selecionarComunidade(usuarioId: number) {
     return {
@@ -110,8 +109,11 @@ export class ComunidadesService {
                 );
             }
 
-            const diretorioUploads = join(UPLOADS_DIR, "comunidades");
-            
+            const diretorioUploads = join(
+                process.cwd(),
+                "uploads",
+                "comunidades"
+            );
             const nomeArquivo = `${randomUUID()}${extensao}`;
 
             caminhoFoto = join(diretorioUploads, nomeArquivo);
@@ -756,8 +758,11 @@ export class ComunidadesService {
                 );
             }
 
-            const diretorioUploads = join(UPLOADS_DIR, "comunidades");
-            
+            const diretorioUploads = join(
+                process.cwd(),
+                "uploads",
+                "comunidades"
+            );
             const nomeArquivo = `${randomUUID()}${extensao}`;
 
             caminhoFoto = join(diretorioUploads, nomeArquivo);

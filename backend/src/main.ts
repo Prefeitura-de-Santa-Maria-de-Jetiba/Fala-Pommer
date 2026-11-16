@@ -3,19 +3,19 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { UPLOADS_DIR } from './config/uploads';
+import { join } from 'node:path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   // Disponibiliza os arquivos enviados pela rota /uploads.
-  app.useStaticAssets(UPLOADS_DIR, {
+  app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads/',
   });
 
   // O front monta as URLs com VITE_API_URL (que termina em /api), então os
   // arquivos também precisam responder em /api/uploads.
-  app.useStaticAssets(UPLOADS_DIR, {
+  app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/api/uploads/',
   });
 
