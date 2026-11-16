@@ -18,7 +18,7 @@ import * as bcrypt from "bcrypt";
 import { randomUUID } from "node:crypto";
 import { mkdir, unlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { identity } from "rxjs";
+import { UPLOADS_DIR } from "src/config/uploads";
 
 export type ArquivoFotoPerfilUpload = {
     originalname: string;
@@ -572,11 +572,8 @@ export class UsuariosService {
             );
         }
 
-        const diretorioUploads = join(
-            process.cwd(),
-            "uploads",
-            "perfis"
-        );
+        const diretorioUploads = join(UPLOADS_DIR, "perfis");
+
         const nomeArquivo = `${randomUUID()}${extensao}`;
         const caminhoArquivo = join(diretorioUploads, nomeArquivo);
         const urlFoto = `/uploads/perfis/${nomeArquivo}`;
