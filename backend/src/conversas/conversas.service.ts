@@ -17,6 +17,7 @@ import { Prisma } from "../generated/prisma/client";
 import { NotificacoesService } from "../notificacoes/notificacoes.service";
 import { MensagensCriptografiaService } from "../criptografia/mensagens-criptografia.service";
 import IdentificadorDeSpanMensagens from "../services/identificadorDeSpanMensagens"
+import { UPLOADS_DIR } from "src/config/uploads";
 
 export type ArquivoMensagemUpload = {
     originalname: string;
@@ -1954,7 +1955,7 @@ export class ConversasService {
         } | null = null;
 
         if (arquivo) {
-            const diretorioUploads = join(process.cwd(), "uploads", "chat");
+            const diretorioUploads = join(UPLOADS_DIR, "chat");
             const extensao = this.obterExtensaoArquivo(arquivo.mimetype);
             const nomeArmazenado = `${randomUUID()}${extensao}`;
 
