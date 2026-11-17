@@ -363,7 +363,6 @@ export class ConversasService {
                     where: {
                         id: usuarioSelecionadoId
                     },
-
                     select: {
                         id: true,
                         nome: true,
